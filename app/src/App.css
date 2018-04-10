@@ -1,0 +1,87 @@
+.container{
+ 	display: flex;
+ 	display: -webkit-flex;
+	flex-direction: column;
+	min-width: 100%
+}
+
+.header{
+	background-color:#0f1113;
+	box-shadow:0 1px 1px #ccc;
+	padding: 20px 40px;
+	height: 80px;
+	color: #ffffff;
+	box-sizing: border-box;
+  	top:-100px;
+	-webkit-transition:top 0.3s;
+	transition:top 0.3s;
+}
+
+.content-wrapper{
+  display: flex;
+  min-height: 400px;
+}
+
+.left-sidebar-wrapper{
+   flex:2;
+   border: 1px dotted #0f1113;
+   border-left: 0;
+   border-right: 0;
+   min-height: 100%;
+}
+
+
+.main-content-wrapper{
+  flex:5;
+  border: 1px dotted #0f1113;
+  min-height: 90%;
+} 
+
+.content-buttons{
+	position: absolute;
+	right:    0;
+	bottom:   0;
+}
+
+.content-buttons > button{
+	margin: 10px;
+}
+
+.box{
+  border-bottom: 1px dotted #0f1113;
+  flex-flow: wrap;
+  height: auto;
+  min-height: 200px;
+  flex:1
+}
+
+.header-fixed-placeholder{
+	height: 80px;
+	display: none;
+}
+
+/* Logo */
+
+.header-fixed img {
+	float: left;
+	width: 70px;
+	line-height: 40px;
+	margin: 0;
+}
+
+.header-fixed .header-limiter h1 span {
+	color: #5383d3;
+}
+
+/* The navigation links */
+
+.header-fixed .header-limiter a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.header-fixed .header-limiter nav {
+	font:16px Arial, Helvetica, sans-serif;
+	line-height: 40px;
+	float: right;
+}
