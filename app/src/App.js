@@ -6,8 +6,9 @@ import './App.css';
 import img1 from './img/1.jpg';
 import img2 from './img/2.jpg';
 import logo from './img/logo.png';
-import RndCustom from './components/RnDComponent';
+import Dnd from './components/DndComponent';
 import {Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody} from 'react-accessible-accordion';
+import { zimgoData } from './mocks/zimgoData';
 
 export default class App extends React.Component {
 
@@ -26,6 +27,14 @@ export default class App extends React.Component {
   }
 
   render() {
+    const formatedZimgoData = zimgoData.map((item)=>
+    <div key={item.id}>
+      <img src={item.img} style={{height:50+'px', width:50+'px', borderRadius:30}}/> {item.name}
+      <p>
+      {item.text}
+      </p>
+    </div>
+    )
     return (
       <div className="flex-container">
         <div className="header">
@@ -57,10 +66,10 @@ export default class App extends React.Component {
                   </AccordionItemTitle>
                   <AccordionItemBody>
 
-                    <RndCustom
-                      width={500}
-                      height={400}
-                      text="mehmed"
+                    <Dnd
+                      width={150}
+                      height={150}
+                      type="img"
                       img="http://res.cloudinary.com/demo/image/upload/multiple/folders/sample.jpg"/>
 
                   </AccordionItemBody>
@@ -115,12 +124,33 @@ export default class App extends React.Component {
           </div>
 
             <div className="main-body-wrapper">
-              <RndCustom
+           <div>
+                  {formatedZimgoData}
+           </div>
+          
+              {/* <Dnd
                 width={150}
                 height={150}
-                text="The lion (Panthera leo) is a species in the family Felidae and a member of the genus Panthera. It is the second largest extant species after the tiger. It exhibits a pronounced sexual dimorphism; males are larger than females with a typical weight range of 150 to 250 kg (331 to 551 lb) for the former and 120 to 182 kg (265 to 401 lb) for the latter. In addition, male lions have a prominent mane, which is perhaps the most recognisable feature of the species. Both sexes have hairy tufts at the end of their tails."
-                img={img1}/> {/* <RndCustom width={150} height={150} text="Bears are carnivoran mammals of the family Ursidae. They are classified as caniforms, or doglike carnivorans. Although only eight species of bears are extant, they are widespread, appearing in a wide variety of habitats throughout the Northern Hemisphere and partially in the Southern Hemisphere. Bears are found on the continents of North America, South America, Europe, and Asia. Common characteristics of modern bears include large bodies with stocky legs, long snouts, small rounded ears, shaggy hair, plantigrade paws with five nonretractile claws, and short tails." img={img2}/> */}
+                value="The lion (Panthera leo) is a species in the family Felidae and a member of the genus Panthera. It is the second largest extant species after the tiger. It exhibits a pronounced sexual dimorphism; males are larger than females with a typical weight range of 150 to 250 kg (331 to 551 lb) for the former and 120 to 182 kg (265 to 401 lb) for the latter. In addition, male lions have a prominent mane, which is perhaps the most recognisable feature of the species. Both sexes have hairy tufts at the end of their tails."
+                type="text"/>
 
+                <Dnd
+                width={150}
+                height={150}
+                value={img1}
+                type="img"/>
+
+                <Dnd
+                width={150}
+                height={150}
+                value="The lion (Panthera leo) is a species in the family Felidae and a member of the genus Panthera. It is the second largest extant species after the tiger. It exhibits a pronounced sexual dimorphism; males are larger than females with a typical weight range of 150 to 250 kg (331 to 551 lb) for the former and 120 to 182 kg (265 to 401 lb) for the latter. In addition, male lions have a prominent mane, which is perhaps the most recognisable feature of the species. Both sexes have hairy tufts at the end of their tails."
+                type="text"/>
+
+                <Dnd
+                width={150}
+                height={150}
+                value={img2}
+                type="img"/> */}
             </div>
           </div>
         </div>
