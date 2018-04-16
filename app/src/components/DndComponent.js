@@ -18,8 +18,8 @@ class DnD extends React.Component {
         this.state = {
             width: this.props.width || 100,
             height: this.props.height || 100,
-            x: 10,
-            y: 10
+            x: this.props.x || 10,
+            y: this.props.y || 10
         }
     }
 
@@ -27,6 +27,7 @@ class DnD extends React.Component {
 render() {
     return (
         <Rnd
+            className={this.props.wrapperClass}
             style={style}
             size={{
             width: this.state.width,
@@ -37,7 +38,7 @@ render() {
             y: this.state.y
         }}
             onDragStop={(e, d) => {
-            this.setState({x: d.x, y: d.y});
+            this.setState({x: d.x, y: d.y})
         }}
             onResize={(e, direction, ref, delta, position) => {
             this.setState({
@@ -48,11 +49,15 @@ render() {
         }}>
            {
                this.props.type==dndTypes.imgType &&
-               <img style={{ width: this.state.width, height: this.state.height}} src={this.props.value}/>            
+               <img style={{ width: this.state.width, height: this.state.height}} src={this.props.value} className={this.props.contentClass}/>            
            }
            {
                this.props.type==dndTypes.freeTextType &&
-               <span style={{fontSize: 10 + 'px'}}>{this.props.value}</span>
+               <span style={{overflow: "hidden"}} className={this.props.contentClass}>{this.props.value}</span>
+            }
+            {
+               this.props.type==dndTypes.infoGraphicType &&
+               <div className={this.props.contentClass} style={{ width: this.state.width, height: this.state.height}}>{this.props.children}</div>
             }
         </Rnd>
         )
@@ -60,8 +65,12 @@ render() {
 }
 
 DnD.propTypes = {
+    width:PropTypes.number,
+    height:PropTypes.number,
     type: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
+    wrapperClass:PropTypes.string,
+    contentClass:PropTypes.string
   };
 
 export default DnD;

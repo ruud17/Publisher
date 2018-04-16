@@ -35,7 +35,7 @@
 
 .main-body-wrapper{
 	border: 1px dotted #0f1113;
-	height: 670px;
+	height: 1200px;
 	margin-left: 25px;
 	margin-top: 40px;
 } 
@@ -75,4 +75,42 @@
 	font:16px Arial, Helvetica, sans-serif;
 	line-height: 40px;
 	float: right;
+}
+
+.zimgo-article{
+	width: 400px;
+	display: flex;
+	flex-flow: wrap;
+}
+
+.zimgo-content{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.zimgo-content-name{
+	font-size: 14px;
+}
+
+.zimgo-content-description{
+	font-size: 10px;
+}
+
+
+.zimgo-wrapper-name{
+	margin-left:130px
+}
+
+ 
+.zimgo-wrapper-description{
+	margin-left:130px;
+	margin-top:30px;
+}
+
+.img-album{
+	margin-left: 150px;
+}
+
+.accordion-custom-title{
+	/* background-color: #fffrfff; */
 }

@@ -1,4 +1,5 @@
 export const dndTypes = {
     imgType: 'img',
-    freeTextType: 'text'
+    freeTextType: 'text',
+    infoGraphicType:'infoGraphic'
 }

@@ -1,89 +1,55 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class InfoGraphicComponent extends Component {
     constructor(props, context) {
         super(props, context);
-        
+        console.log('props', props);
+        this.state={
+            infoGraphicItems:[]
+        }
+
     }
-    
+
+    componentWillReceiveProps (nextProps){
+        console.log('nextProps', nextProps);
+        this.setState({
+            infoGraphicItems:nextProps.data
+        })
+    }
+
     render() {
+        const {infoGraphicItems} = this.state;
+
+        const listResult= infoGraphicItems.map(item =>
+            <li className="step-list__item" key={item.id}>
+            <div className="step-list__item__inner">
+                <div className="content">
+                    <div className="body">
+                        <h2>{item.name}</h2>
+                        <p>{item.text}</p>
+                    </div>
+
+                    <div className="icon">
+                        <img
+                            src={item.img}
+                            alt="Check"/>
+                    </div>
+                </div>
+            </div>
+        </li> 
+        )
+
         return (
-            <div className="container" style={{width:200+'px', height:150+'px'}}>
-            <ol className="step-list">
-                <li className="step-list__item">
-                    <div className="step-list__item__inner">
-                        <div className="content">
-                            <div className="body">
-                                <h2>Lorem ipsum dolor sit amet</h2>
-                                <p>Consectetur adipisicing elit. Reprehenderit perspiciatis.</p>
-                            </div>
-        
-                            <div className="icon">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/13060/check-circle.svg" alt="Check" />
-                            </div>                
-                        </div>
-                    </div>
-                </li>
-                <li className="step-list__item">
-                    <div className="step-list__item__inner">
-                        <div className="content">
-                            <div className="body">
-                                <h2>Impedit ducimus saepe assumenda</h2>
-                                <p>Sapiente beatae? Quo maiores consequatur, eveniet autem eos quia molestias perferendis.</p>
-                            </div>
-        
-                            <div className="icon">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/13060/mail_outline_copy.svg" alt="Check" />
-                            </div>                
-                        </div>
-                    </div>
-                </li>
-                <li className="step-list__item">
-                    <div className="step-list__item__inner">
-                        <div className="content">
-                            <div className="body">
-                                <h2>Repellendus</h2>
-                                <p> Asperiores eum, accusantium harum, aperiam labore assumenda quisquam tempore magnam enim iusto voluptatum aspernatur dicta saepe possimus nobis molestiae quas sapiente.</p>
-                            </div>
-        
-                            <div className="icon">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/13060/graph.svg" alt="Check" />
-                            </div>                
-                        </div>
-                    </div>
-                </li>
-                <li className="step-list__item">
-                    <div className="step-list__item__inner">
-                        <div className="content">
-                            <div className="body">
-                                <h2>Quaerat</h2>
-                                <p> Iusto quod incidunt vel quidem fuga quos laudantium dignissimos eos, tempore sequi quis praesentium.</p>
-                            </div>
-        
-                            <div className="icon">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/13060/calendar.svg" alt="Check" />
-                            </div>                
-                        </div>
-                    </div>
-                </li>
-                <li className="step-list__item">
-                    <div className="step-list__item__inner">
-                        <div className="content">
-                            <div className="body">
-                                <h2>Voluptatum alias hic</h2>
-                                <p>Officiis excepturi atque velit asperiores cum perferendis, repellendus facilis voluptatibus quas! Consequuntur.</p>
-                            </div>
-        
-                            <div className="icon">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/13060/heart.svg" alt="Check" />
-                            </div>                
-                        </div>
-                    </div>
-                </li>
+            <ol className="step-list"> 
+            {listResult}
             </ol>
-        </div>
         );
     }
 }
+
+InfoGraphicComponent.propTypes = {
+    data:PropTypes.array
+  };
 
 export default InfoGraphicComponent;
