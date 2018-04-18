@@ -11,44 +11,53 @@ import {Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody} from 'r
 import {zimgoData} from './mocks/zimgoData';
 import {topNews} from './mocks/topNews';
 import _ from 'lodash';
+import Rodal from 'rodal';
+import CreateWebsiteComponent from './components/CreateWebsiteComponent';
 
 export default class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      infoGraphicData:[]
+      infoGraphicData: [],
+      modalVisible: false,
+      mainContent: ""
     }
   }
 
-  getElem() {
-    debugger;
+  getContent = () => {
     const elem = document
       .getElementById('mainEl')
       .innerHTML;
-    console.log('elem', elem);
-    return;
+    console.log('elem', typeof(elem));
+    return elem;
   }
 
-  getRandomInfoGraphicData = () =>{
-    const randomData = _.sampleSize(topNews,3);
-     return randomData;
+  hideModal = () => {
+    this.setState({modalVisible: false})
   }
 
-  updateInfoGraphic(){
-   
+  openModal = () => {
+    const content = this.getContent();
+    this.setState({modalVisible: true, mainContent: content})
+  }
+
+  getRandomInfoGraphicData = () => {
+    const randomData = _.sampleSize(topNews, 3);
+    return randomData;
   }
 
   componentDidMount() {
-    setInterval(()=>{
+    setInterval(() => {
       this.setState({
-        infoGraphicData : this.getRandomInfoGraphicData()
+        infoGraphicData: this.getRandomInfoGraphicData()
       })
-    },3000)  }
+    }, 3000)
+  }
 
   render() {
     const formatedZimgoData = zimgoData.map((item) => <div key={item.id} className="zimgo-article">
-      <Dnd value={item.img} type="img" height={120} width={120}/>
+      <Dnd value={item.img} type="img" height={130} width={155}/>
       <Dnd
         value={item.name}
         type="text"
@@ -77,9 +86,9 @@ export default class App extends React.Component {
         <div className="content-wrapper">
           <div className="left-sidebar-wrapper">
             <div className="sidebar-wrapper">
-              <Accordion>
+              <Accordion accordion={false} className="accordion-custom">
                 <AccordionItem>
-                  <AccordionItemTitle>
+                  <AccordionItemTitle className="accordion-item-custom">
                     <h5>Templates</h5>
                   </AccordionItemTitle>
                   <AccordionItemBody>
@@ -89,7 +98,7 @@ export default class App extends React.Component {
                 </AccordionItem>
 
                 <AccordionItem>
-                  <AccordionItemTitle>
+                  <AccordionItemTitle className="accordion-item-custom">
                     <h5>Albums</h5>
                   </AccordionItemTitle>
                   <AccordionItemBody
@@ -108,18 +117,21 @@ export default class App extends React.Component {
                 </AccordionItem>
 
                 <AccordionItem>
-                  <AccordionItemTitle>
+                  <AccordionItemTitle className="accordion-item-custom">
                     <h5>InfoGraphics</h5>
                   </AccordionItemTitle>
-                  <AccordionItemBody>
-                    <Dnd width={500} height={500} type="infoGraphic">
+                  <AccordionItemBody
+                    style={{
+                    height: 320 + 'px'
+                  }}>
+                    <Dnd width={450} height={290} type="infoGraphic">
                       <InfoGraphicComponent data={this.state.infoGraphicData}/>
                     </Dnd>
                   </AccordionItemBody>
                 </AccordionItem>
 
                 <AccordionItem>
-                  <AccordionItemTitle>
+                  <AccordionItemTitle className="accordion-item-custom">
                     <h5>Charts</h5>
                   </AccordionItemTitle>
                   <AccordionItemBody>
@@ -128,7 +140,7 @@ export default class App extends React.Component {
                 </AccordionItem>
 
                 <AccordionItem>
-                  <AccordionItemTitle>
+                  <AccordionItemTitle className="accordion-item-custom">
                     <h5>Custom Components</h5>
                   </AccordionItemTitle>
                   <AccordionItemBody>
@@ -140,7 +152,7 @@ export default class App extends React.Component {
             </div>
           </div>
 
-          <div className="main-content-wrapper" id="mainEl">
+          <div className="main-content-wrapper">
             <div className="row">
               <div className="content-buttons">
                 {/* <button
@@ -153,17 +165,19 @@ export default class App extends React.Component {
                   id="submit"
                   name="button"
                   value="register"
-                  className="btn btn-primary btn-sm">Publish</button>
+                  className="btn btn-primary btn-sm"
+                  onClick={this.openModal}>Publish</button>
               </div>
             </div>
-
-            <div className="main-body-wrapper">
-              <div className="zimgo-content">
-                {formatedZimgoData}
-              </div>
+            <div id="newWebsiteId">
+            <CreateWebsiteComponent zimgoData={formatedZimgoData}/>
             </div>
           </div>
         </div>
+
+        <Rodal visible={this.state.modalVisible} onClose={this.hideModal}>
+          <div>{this.state.mainContent}</div>
+        </Rodal>
       </div>
 
     );

@@ -9,7 +9,12 @@ import 'react-accessible-accordion/dist/minimal-example.css';
 
 // 'Fancy' theme - boilerplate styles for all components, as seen on our demo:
 import 'react-accessible-accordion/dist/fancy-example.css';
+import 'rodal/lib/rodal.css';
+import {BrowserRouter} from 'react-router-dom';
+import Main from './components/MainComponent';
 
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <BrowserRouter>
+    <Main/>
+</BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();

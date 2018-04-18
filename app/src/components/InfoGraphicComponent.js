@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class InfoGraphicComponent extends Component {
     constructor(props, context) {
         super(props, context);
-        console.log('props', props);
         this.state={
             infoGraphicItems:[]
         }
@@ -12,7 +11,6 @@ class InfoGraphicComponent extends Component {
     }
 
     componentWillReceiveProps (nextProps){
-        console.log('nextProps', nextProps);
         this.setState({
             infoGraphicItems:nextProps.data
         })
